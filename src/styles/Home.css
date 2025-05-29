@@ -1,0 +1,315 @@
+/* Home page styles */
+.main-container {
+    width: 100%;
+    height: 100vh;
+    margin-top: 80px;
+    background-color: #101e2b;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.main-content {
+    width: 85%;
+    max-width: 1200px;
+    height: 100%;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    position: relative;
+    z-index: 2;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.main-content.loaded {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.main-info {
+    text-align: left;
+    color: #fff;
+    max-width: 600px;
+}
+
+.main-info h1 {
+    font-size: 52px;
+    line-height: 1.2;
+    margin-bottom: 15px;
+    font-weight: 300;
+    opacity: 0;
+    transform: translateX(-20px);
+    transition: opacity 0.6s ease 0.2s, transform 0.6s ease 0.2s;
+}
+
+.main-info h2 {
+    font-size: 42px;
+    line-height: 1.2;
+    margin-bottom: 25px;
+    font-weight: 600;
+    color: #7bb6f9;
+    opacity: 0;
+    transform: translateX(-20px);
+    transition: opacity 0.6s ease 0.4s, transform 0.6s ease 0.4s;
+}
+
+.main-info p {
+    font-size: 18px;
+    line-height: 1.6;
+    margin-bottom: 35px;
+    max-width: 500px;
+    color: #8da9c4;
+    opacity: 0;
+    transform: translateX(-20px);
+    transition: opacity 0.6s ease 0.6s, transform 0.6s ease 0.6s;
+}
+
+.main-content.loaded h1,
+.main-content.loaded h2,
+.main-content.loaded p {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.main-info button {
+    padding: 14px 36px;
+    font-size: 16px;
+    cursor: pointer;
+    border: 2px solid #2196f3;
+    background-color: transparent;
+    transition: all 0.4s ease;
+    color: #fff;
+    border-radius: 30px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease 0.8s, transform 0.6s ease 0.8s, background-color 0.3s ease, color 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.main-content.loaded button {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.main-info button:hover {
+    background-color: #2196f3;
+    color: #fff;
+    box-shadow: 0 5px 15px rgba(33, 150, 243, 0.4);
+}
+
+.main-info button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(45deg, #134074, #2196f3);
+    z-index: -1;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.main-info button:hover::before {
+    opacity: 0.2;
+}
+
+/* ECG Animation Styles */
+.ecg-animation {
+    position: absolute;
+    width: 100%;
+    height: 200px;
+    bottom: 10%;
+    left: 0;
+    z-index: 1;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+.ecg-line {
+    position: absolute;
+    bottom: 50%;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: rgba(33, 150, 243, 0.2);
+}
+
+.ecg-path {
+    position: absolute;
+    bottom: 50%;
+    left: 0;
+    width: 100%;
+    height: 100px;
+    stroke: #42a5f5;
+    stroke-width: 2;
+    fill: none;
+    stroke-dasharray: 1000;
+    stroke-dashoffset: 1000;
+    animation: ecg-draw 6s linear infinite;
+}
+
+.ecg-grid {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-image: 
+        linear-gradient(to right, rgba(141, 169, 196, 0.05) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(141, 169, 196, 0.05) 1px, transparent 1px);
+    background-size: 40px 40px;
+}
+
+.ecg-beep {
+    position: absolute;
+    right: 30px;
+    top: 20px;
+    width: 10px;
+    height: 10px;
+    background-color: #f44336;
+    border-radius: 50%;
+    opacity: 0;
+    animation: ecg-beep 6s infinite;
+}
+
+@keyframes ecg-draw {
+    0% {
+        stroke-dashoffset: 1000;
+    }
+    100% {
+        stroke-dashoffset: 0;
+    }
+}
+
+@keyframes ecg-beep {
+    0%, 40%, 100% {
+        opacity: 0;
+        transform: scale(0.5);
+    }
+    45%, 50%, 55% {
+        opacity: 1;
+        transform: scale(1.2);
+    }
+}
+
+@media (max-width: 768px) {
+    .main-info h1 {
+        font-size: 36px;
+    }
+    .main-info h2 {
+        font-size: 28px;
+    }
+    .main-info p {
+        font-size: 16px;
+    }
+    .main-info button {
+        padding: 12px 28px;
+    }
+    
+    .ecg-animation {
+        height: 150px;
+        bottom: 5%;
+    }
+}
+/* Enhanced ECG Animation */
+.ecg-animation {
+    position: absolute;
+    width: 100%;
+    height: 200px;
+    bottom: 10%;
+    left: 0;
+    z-index: 1;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+.ecg-line {
+    position: absolute;
+    bottom: 50%;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: rgba(33, 150, 243, 0.1);
+}
+
+.ecg-path {
+    position: absolute;
+    bottom: 50%;
+    left: 0;
+    width: 100%;
+    height: 100px;
+    stroke: #42a5f5;
+    stroke-width: 2;
+    fill: none;
+    stroke-dasharray: 2000;
+    stroke-dashoffset: 2000;
+    animation: ecg-draw 12s linear infinite;
+    filter: drop-shadow(0 0 3px rgba(66, 165, 245, 0.5));
+}
+
+.ecg-grid {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-image: 
+        linear-gradient(to right, rgba(141, 169, 196, 0.05) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(141, 169, 196, 0.05) 1px, transparent 1px);
+    background-size: 40px 40px;
+}
+
+.ecg-beep {
+    position: absolute;
+    right: 30px;
+    top: 20px;
+    width: 10px;
+    height: 10px;
+    background-color: #f44336;
+    border-radius: 50%;
+    opacity: 0;
+    animation: ecg-beep 12s infinite;
+    box-shadow: 0 0 10px #f44336;
+}
+
+@keyframes ecg-draw {
+    0% {
+        stroke-dashoffset: 2000;
+    }
+    100% {
+        stroke-dashoffset: 0;
+    }
+}
+
+@keyframes ecg-beep {
+    0%, 20%, 100% {
+        opacity: 0;
+        transform: scale(0.5);
+    }
+    22%, 24%, 26% {
+        opacity: 1;
+        transform: scale(1.3);
+    }
+    25% {
+        transform: scale(1.5);
+    }
+}
+
+/* Добавьте плавное мерцание фона */
+@keyframes bg-pulse {
+    0%, 100% {
+        background-color: #101e2b;
+    }
+    50% {
+        background-color: #0f1a25;
+    }
+}
+
+.main-container {
+    animation: bg-pulse 30s infinite ease-in-out;
+}
